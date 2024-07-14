@@ -1,27 +1,25 @@
+"use client";
 import React from "react";
-import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { useRouter } from "next/navigation";
 
 interface SectionTopProps {
   content: any;
 }
 
 const SectionTop: React.FC<SectionTopProps> = ({ content }) => {
+  const router = useRouter();
+
+  const handleClick = (url: string) => {
+    router.push(url);
+  };
   return (
-    <div className="flex flex-col items-center justify-center mr-4">
-      <Image
-        width={40}
-        height={40}
-        src={content.image}
-        alt="Image"
-        className="rounded-md object-cover"
-      />
-      <TooltipProvider>
+    <div
+      className="flex flex-col items-center justify-center mr-4"
+      onClick={() => handleClick("/user/attendance-history")}
+    >
+      {content.image}
+      <p className="text-sm">{content.name}</p>
+      {/* <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             <p className="">{content.name}</p>
@@ -30,7 +28,7 @@ const SectionTop: React.FC<SectionTopProps> = ({ content }) => {
             <p>{content.name}</p>
           </TooltipContent>
         </Tooltip>
-      </TooltipProvider>
+      </TooltipProvider> */}
     </div>
   );
 };

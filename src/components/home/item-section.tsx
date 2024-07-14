@@ -5,13 +5,11 @@ interface ItemSectionProps {
 const ItemSection: React.FC<ItemSectionProps> = ({ content }) => {
   return (
     <div>
-      <p className="text-sm font-normal leading-tight truncate-2-lines">
-        {content.title}
-      </p>
+      <p className="text-sm font-normal  truncate-2-lines">{content.title}</p>
       <p className="text-xs text-muted-foreground">
         {content.className} - {content.updatedAt}
       </p>
-      <div className="border-b-2 pt-4 mb-4"></div>
+      <div className="border-b-2 pt-2 mb-2"></div>
     </div>
   );
 };

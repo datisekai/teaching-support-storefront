@@ -31,13 +31,6 @@ const Section: React.FC<SectionProps> = ({ content }) => {
       updatedAt: "27/10/2024",
       className: "Quốc phòng an ninh 3",
     },
-    {
-      id: 4,
-      title:
-        " Thông báo nghỉ học quốc phòng 2 lớp chiều thứ 3, ngày 12/3/1020 lớp7 mã môn 293182",
-      updatedAt: "27/10/2024",
-      className: "Quốc phòng an ninh 3",
-    },
   ];
   return (
     <div>
@@ -46,11 +39,11 @@ const Section: React.FC<SectionProps> = ({ content }) => {
         <ArrowRight className="rounded-full bg-secondary p-1" />
       </div>
       <Separator className="my-2" />
-      <ScrollArea className="h-64 flex flex-col rounded-md border p-4">
+      <div className="flex flex-col rounded-md border p-2">
         {arr.map((item, index) => {
           return <ItemSection content={item} key={index} />;
         })}
-      </ScrollArea>
+      </div>
       <Separator className="my-2" />
     </div>
   );
