@@ -45,7 +45,7 @@ const HomePage = () => {
   return (
     <div className="relative">
       <Section1 />
-      <ScrollArea className="h-[60vh] flex flex-col pt-24">
+      <div className="pt-24">
         <div className="flex items-center my-4">
           {arrTop.map((item, index) => {
             return <SectionTop content={item} key={index} />;
@@ -55,7 +55,7 @@ const HomePage = () => {
         {arr.map((item, index) => {
           return <Section content={item} key={index} />;
         })}
-      </ScrollArea>
+      </div>
     </div>
   );
 };
