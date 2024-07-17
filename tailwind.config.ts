@@ -33,6 +33,12 @@ const config = {
           DEFAULT: "rgb(241 245 249)",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        success: {
+          DEFAULT: "#00B14F",
+        },
+        warning: {
+          DEFAULT: "#F8BB86",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

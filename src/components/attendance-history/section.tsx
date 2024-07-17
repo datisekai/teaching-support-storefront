@@ -1,35 +1,62 @@
 import React, { FC } from "react";
+import { Badge } from "../ui/badge";
+
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import DropdownMenuCustom from "../custom/dropdown-menu-custom";
+import { Dot } from "lucide-react";
+
 interface ISection {
   content: any;
 }
 
 const Section: FC<ISection> = ({ content }) => {
   return (
-    <div className="w-full px-4 mb-4 bg-secondary">
-      <div className="flex justify-between items-center py-2">
-        <div className="text-sm font-bold">Điểm danh</div>
-        <div className="text-sm font-bold">{content.date}</div>
+    <div className="w-full mb-4 bg-white">
+      <div className="flex justify-between items-center py-2 px-4">
+        <div className="flex items-center">
+          <div className="text-sm font-bold">Mã môn: {content.id}</div>
+          <Dot className="text-slate-400 w-4" />
+          <Badge
+            variant={"outline"}
+            className="bg-success text-white font-thin"
+          >
+            Thành công
+          </Badge>
+        </div>
+        <DropdownMenuCustom />
       </div>
-      <div className="border-b-2 bg-secondary "></div>
-      <div className="py-4">
+      <div className="border-b-[1px] bg-secondary "></div>
+      <div className="p-4">
         <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Môn:</div>
-          <div className="col-span-3 text-sm ">{content.subjectName}</div>
+          <div className="col-span-1 text-sm text-slate-400">Môn:</div>
+          <div className="col-span-3 text-sm font-medium text-primary">
+            {content.subjectName}
+          </div>
         </div>
         <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Tên giảng viên:</div>
-          <div className="col-span-3 text-sm">{content.teacherName}</div>
+          <div className="col-span-1 text-sm text-slate-400">Giảng viên:</div>
+          <div className="col-span-3 text-sm flex items-center">
+            <Avatar className="mr-2 border-2">
+              <AvatarImage src={content.user.avatar} />
+              <AvatarFallback>US</AvatarFallback>
+            </Avatar>
+            <p>{content.user.name}</p>
+          </div>
         </div>
         <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Tiết bắt đầu:</div>
+          <div className="col-span-1 text-sm text-slate-400">Ngày:</div>
+          <div className="col-span-3 text-sm">{content.date}</div>
+        </div>
+        <div className="grid grid-cols-4">
+          <div className="col-span-1 text-sm text-slate-400">Tiết bắt đầu:</div>
           <div className="col-span-3 text-sm">{content.timeStart}</div>
         </div>
         <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Số tiết:</div>
+          <div className="col-span-1 text-sm text-slate-400">Số tiết:</div>
           <div className="col-span-3 text-sm">{content.timeCount}</div>
         </div>
         <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Trạng thái:</div>
+          <div className="col-span-1 text-sm text-slate-400">Trạng thái:</div>
           <div className="col-span-3 text-sm">
             {content.status == "1" ? "Thành công" : "Thất bại"}
           </div>

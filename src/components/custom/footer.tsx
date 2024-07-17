@@ -1,9 +1,12 @@
 "use client";
 import { House, QrCode, Settings } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BsQrCodeScan } from "react-icons/bs";
-const Footer = () => {
+type FooterProps = {
+  activeItem?: string;
+};
+const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
   const router = useRouter();
 
   const handleClick = (url: string) => {
@@ -11,33 +14,53 @@ const Footer = () => {
   };
   return (
     <div className="bg-white flex items-center h-full w-full px-6">
-      <div className="w-1/5 flex flex-col items-center">
-        <House width={24} height={24} className="text-slate-500" />
-        <p className="text-xs text-slate-500">Trang chủ</p>
+      <div
+        className={`w-1/5 flex flex-col items-center ${
+          activeItem === "/user" ? "text-primary" : "text-slate-500"
+        }`}
+        onClick={() => handleClick("/user")}
+      >
+        <House width={24} height={24} />
+        <p className="text-xs ">Trang chủ</p>
       </div>
 
-      <div className="w-1/5 flex flex-col items-center">
-        <House width={24} height={24} className="text-slate-500" />
-        <p className="text-xs text-slate-500">Trang chủ</p>
+      <div
+        className={`w-1/5 flex flex-col items-center ${
+          activeItem === "/qr-scanner1" ? "text-primary" : "text-slate-500"
+        }`}
+        onClick={() => handleClick("/qr-scanner")}
+      >
+        <House width={24} height={24} />
+        <p className="text-xs ">Trang chủ</p>
       </div>
 
-      <div className="w-1/5 flex justify-center items-center pb-2">
-        <div
-          className="bg-primary rounded-full p-2"
-          onClick={() => handleClick("/qr-scanner")}
-        >
+      <div
+        className={`w-1/5 flex justify-center items-center pb-2 ${
+          activeItem === "/qr-scanner" ? "text-primary" : "text-slate-500"
+        }`}
+        onClick={() => handleClick("/qr-scanner")}
+      >
+        <div className="bg-primary rounded-full p-2">
           <BsQrCodeScan className="w-8 h-8 text-white" />
         </div>
       </div>
 
-      <div className="w-1/5 flex flex-col items-center">
-        <Settings width={24} height={24} className="text-slate-500" />
-        <p className="text-xs text-slate-500">Cài đặt</p>
+      <div
+        className={`w-1/5 flex flex-col items-center ${
+          activeItem === "/setting1" ? "text-primary" : "text-slate-500"
+        }`}
+      >
+        <Settings width={24} height={24} />
+        <p className="text-xs ">Cài đặt</p>
       </div>
 
-      <div className="w-1/5 flex flex-col items-center">
-        <Settings width={24} height={24} className="text-slate-500" />
-        <p className="text-xs text-slate-500">Cài đặt</p>
+      <div
+        className={`w-1/5 flex flex-col items-center ${
+          activeItem === "/setting" ? "text-primary" : "text-slate-500"
+        }`}
+      >
+        <Settings width={24} height={24} />
+        <p className="text-xs ">Cài đặt</p>
       </div>
     </div>
   );
