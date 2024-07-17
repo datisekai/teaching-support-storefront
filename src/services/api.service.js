@@ -8,8 +8,9 @@ const apiService = axios.create({
 apiService.interceptors.request.use(
   (config) => {
     const token = Cookies.get("lg");
+    console.log("testt " + token);
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token.value}`;
     }
     return config;
   },

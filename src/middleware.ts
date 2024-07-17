@@ -6,10 +6,12 @@ export async function middleware(request: NextRequest) {
 
   console.log(token);
 
-  // try {
-  //   const response = await fetchUser();
-  //   console.log(response);
-  // } catch (error) {}
+  try {
+    const response = await fetchUser();
+    console.log("DATA1:" + response);
+  } catch (error) {
+    console.log("DATA2:" + error);
+  }
 
   const url = request.nextUrl.clone();
 
