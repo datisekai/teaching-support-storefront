@@ -15,8 +15,8 @@ const SubHeader: React.FC<SubHeaderProps> = ({ content }) => {
   };
   return (
     <div className="flex items-center text-white">
-      <IoIosArrowRoundBack className="text-[32px] mr-2" onClick={handleClick} />
-      <div>{content.title}</div>
+      <IoIosArrowRoundBack className="text-[24px] mr-2" onClick={handleClick} />
+      <div className="text-sm">{content.title}</div>
     </div>
   );
 };

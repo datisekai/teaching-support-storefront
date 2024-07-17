@@ -54,11 +54,11 @@ const AttendanceHistory = () => {
   return (
     // <main className="flex min-h-screen flex-col items-center justify-between bg-[url('/slider2_1240x450-min.jpg')] bg-cover bg-center">
     <Card className="h-[100vh] md:w-[60vh] w-full rounded-none bg-secondary">
-      <CardHeader className="bg-[url('/background-header.png')] h-[60px] flex justify-center">
+      <CardHeader className="bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
       <CardContent className="px-0">
-        <ScrollArea className="h-[calc(100vh-60px)] ">
+        <ScrollArea className="h-[calc(100vh-40px)] ">
           <SectionTop />
           {arr.map((item, index) => {
             return <Section content={item} key={index} />;
