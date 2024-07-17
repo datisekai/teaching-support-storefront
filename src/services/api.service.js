@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const apiService = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://tsp-be.datisekai.id.vn",
 });
 
 apiService.interceptors.request.use(
