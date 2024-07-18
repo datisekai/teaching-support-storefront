@@ -12,12 +12,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { login } from "../../services/login.services";
 import Cookies from "js-cookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
+import AuthService from "@/services/auth.services";
 const formSchema = z.object({
   code: z
     .string()
@@ -44,21 +44,23 @@ const Section = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const response = await login(values.code, values.password);
-      Cookies.set("lg", response.data.token);
-      toast({
-        className: "bg-success",
-        description: "Đăng nhập thành công.",
-      });
-      router.push("/user");
-    } catch (error) {
-      console.log(error);
+    const data = await AuthService.login({
+      code: values.code,
+      password: values.password,
+    });
+    if (!data) {
       toast({
         variant: "destructive",
         description: "Sai tài khoản hoặc mật khẩu.",
       });
+      return;
     }
+    Cookies.set("lg", data.token);
+    toast({
+      className: "bg-success",
+      description: "Đăng nhập thành công.",
+    });
+    router.push("/user");
   };
   return (
     <Form {...form}>
