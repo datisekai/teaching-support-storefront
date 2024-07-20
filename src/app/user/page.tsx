@@ -51,7 +51,7 @@ const HomePage = () => {
     },
   ];
   return (
-    <Card className="h-[100vh] md:w-[60vh] w-full rounded-none">
+    <Card className="h-[100vh] md:w-[60vh] w-full rounded-none border-none">
       <ScrollArea className="h-[calc(100vh-64px)] ">
         <CardHeader className="bg-[url('/background-header.png')] h-[160px] ">
           <Header content={user} />

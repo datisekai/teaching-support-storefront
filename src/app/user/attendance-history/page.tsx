@@ -52,7 +52,7 @@ const AttendanceHistory = () => {
   ];
   const content = { id: 1, title: "Lịch sử điểm danh" };
   return (
-    <Card className="h-[100vh] md:w-[60vh] w-full rounded-none bg-secondary">
+    <Card className="h-[100vh] md:w-[60vh] w-full rounded-none bg-secondary border-none">
       <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
