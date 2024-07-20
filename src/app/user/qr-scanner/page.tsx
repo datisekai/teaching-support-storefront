@@ -22,11 +22,9 @@ import {
 
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
-  const handleClick = (result: IDetectedBarcode[]) => {
-    console.log(result);
-  };
 
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
+  const [device, setDevice] = useState("");
 
   useEffect(() => {
     const checkCameraAvailability = async () => {
@@ -47,21 +45,30 @@ const QRScanner = () => {
 
     checkCameraAvailability();
   }, []);
-  console.log(cameras);
+
+  const handleClick = (result: IDetectedBarcode[]) => {
+    console.log(result);
+  };
+  const handleChange = (value: string) => {
+    setDevice(value);
+  };
 
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
       <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
-      <CardContent className="flex flex-col items-center justify-between mt-20">
+      <CardContent className="flex flex-col items-center justify-between mt-12">
         <div className="flex flex-col justify-center items-center mb-4">
-          <Select>
+          <Select onValueChange={(value) => handleChange(value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn camera..." />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
+                <SelectItem value="-1">
+                  Chọn camera Chọn cameraChọn camera
+                </SelectItem>
                 {cameras.map((item, index) => {
                   return (
                     <SelectItem value={item.deviceId} key={index}>
@@ -83,7 +90,7 @@ const QRScanner = () => {
           components={{
             onOff: true,
           }}
-          constraints={{ facingMode: "user" }}
+          constraints={{ deviceId: device }}
           onScan={(result) => handleClick(result)}
         />
       </CardContent>
