@@ -66,9 +66,7 @@ const QRScanner = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="-1">
-                  Chọn camera Chọn cameraChọn camera
-                </SelectItem>
+                <SelectItem value="-1">Chọn camera</SelectItem>
                 {cameras.map((item, index) => {
                   return (
                     <SelectItem value={item.deviceId} key={index}>
