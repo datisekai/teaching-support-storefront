@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
     router.push(url);
   };
   return (
-    <div className="bg-white flex items-center h-full w-full px-6">
+    <div className="bg-white flex items-center h-full w-full px-2">
       <div
         className={`w-1/5 flex flex-col items-center ${
           activeItem === "/user" ? "text-primary" : "text-slate-500"

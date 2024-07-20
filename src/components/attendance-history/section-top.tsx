@@ -51,11 +51,11 @@ const SectionTop = () => {
   return (
     <>
       <ScrollArea className="md:w-[60vh] w-screen whitespace-nowrap">
-        <div className="flex items-center px-2 py-2 gap-4 bg-white">
+        <div className="border-b-[1px] border-slate-200 flex items-center px-4 pt-2 gap-4 bg-white">
           {data.map((item, index) => {
             return (
               <div
-                className="text-center"
+                className="relative flex flex-col justify-center items-center"
                 key={index}
                 onClick={() => handleClick(item.id)}
               >
@@ -66,21 +66,23 @@ const SectionTop = () => {
                 >
                   {item.title}
                 </div>
-                {active === item.id ? (
-                  <div className="border-b-2 text-primary border-primary w-6 mx-auto "></div>
-                ) : (
-                  ""
-                )}
+                <div
+                  className={`h-[2px] transition-all duration-300 ease-in-out ${
+                    active === item.id
+                      ? "bg-primary w-6 mx-auto"
+                      : "bg-transparent w-0"
+                  }`}
+                ></div>
               </div>
             );
           })}
         </div>
+
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-      <div className="border-b-[1px] w-full border-slate-200"></div>
+
       <div className="bg-white px-4 py-2 mb-4">
         <DatePickerWithRange className="w-full mb-2" />
-
         <Input type="search" placeholder="Nhập mã/ tên môn học..." />
       </div>
     </>

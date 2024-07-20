@@ -64,7 +64,7 @@ const Section = () => {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-1">
           <FormField
             control={form.control}
@@ -95,7 +95,9 @@ const Section = () => {
             )}
           />
         </div>
-        <Button type="submit">Đăng nhập</Button>
+        <Button type="submit" className="space-y-2">
+          Đăng nhập
+        </Button>
       </form>
     </Form>
   );

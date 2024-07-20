@@ -52,9 +52,8 @@ const AttendanceHistory = () => {
   ];
   const content = { id: 1, title: "Lịch sử điểm danh" };
   return (
-    // <main className="flex min-h-screen flex-col items-center justify-between bg-[url('/slider2_1240x450-min.jpg')] bg-cover bg-center">
     <Card className="h-[100vh] md:w-[60vh] w-full rounded-none bg-secondary">
-      <CardHeader className="bg-[url('/background-header.png')] h-[40px] flex justify-center">
+      <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
       <CardContent className="px-0">
@@ -66,7 +65,6 @@ const AttendanceHistory = () => {
         </ScrollArea>
       </CardContent>
     </Card>
-    // </main>
   );
 };
 

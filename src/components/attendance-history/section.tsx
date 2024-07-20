@@ -27,37 +27,33 @@ const Section: FC<ISection> = ({ content }) => {
       </div>
       <div className="border-b-[1px] bg-secondary "></div>
       <div className="p-4">
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Môn:</div>
-          <div className="col-span-3 text-sm font-medium text-primary">
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Môn:</div>
+          <div className="col-span-4 text-sm font-medium text-primary">
             {content.subjectName}
           </div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Giảng viên:</div>
-          <div className="col-span-3 text-sm flex items-center">
-            <Avatar className="mr-2 border-2">
-              <AvatarImage src={content.user.avatar} />
-              <AvatarFallback>US</AvatarFallback>
-            </Avatar>
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Giảng viên:</div>
+          <div className="col-span-4 text-sm flex items-center">
             <p>{content.user.name}</p>
           </div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Ngày:</div>
-          <div className="col-span-3 text-sm">{content.date}</div>
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Ngày:</div>
+          <div className="col-span-4 text-sm">{content.date}</div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Tiết bắt đầu:</div>
-          <div className="col-span-3 text-sm">{content.timeStart}</div>
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Tiết bắt đầu:</div>
+          <div className="col-span-4 text-sm">{content.timeStart}</div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Số tiết:</div>
-          <div className="col-span-3 text-sm">{content.timeCount}</div>
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Số tiết:</div>
+          <div className="col-span-4 text-sm">{content.timeCount}</div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm text-slate-400">Trạng thái:</div>
-          <div className="col-span-3 text-sm">
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm text-slate-400">Trạng thái:</div>
+          <div className="col-span-4 text-sm">
             {content.status == "1" ? "Thành công" : "Thất bại"}
           </div>
         </div>

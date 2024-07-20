@@ -26,7 +26,7 @@ const HomePage = () => {
       id: 1,
       name: "Tin tức",
       image: (
-        <div className="rounded-full bg-secondary p-2">
+        <div className="rounded-full bg-[#FEF4EB] p-2">
           <IoNewspaperOutline className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
@@ -35,7 +35,7 @@ const HomePage = () => {
       id: 2,
       name: "Điểm danh",
       image: (
-        <div className="rounded-full bg-secondary p-2">
+        <div className="rounded-full bg-[#FEF4EB] p-2">
           <LuUserCheck className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
@@ -44,7 +44,7 @@ const HomePage = () => {
       id: 3,
       name: "Bảng điểm",
       image: (
-        <div className="rounded-full bg-secondary p-2">
+        <div className="rounded-full bg-[#FEF4EB] p-2">
           <PiRankingLight className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
@@ -53,7 +53,7 @@ const HomePage = () => {
   return (
     <Card className="h-[100vh] md:w-[60vh] w-full rounded-none">
       <ScrollArea className="h-[calc(100vh-64px)] ">
-        <CardHeader className="bg-[url('/background-header.png')] h-[160px] flex justify-center">
+        <CardHeader className="bg-[url('/background-header.png')] h-[160px] ">
           <Header content={user} />
         </CardHeader>
         <CardContent className="pb-1 ">
@@ -73,7 +73,7 @@ const HomePage = () => {
           </div>
         </CardContent>
       </ScrollArea>
-      <CardFooter className="pb-0 p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
+      <CardFooter className="p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
         <Footer activeItem="/user" />
       </CardFooter>
     </Card>

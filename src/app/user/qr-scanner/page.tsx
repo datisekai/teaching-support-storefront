@@ -14,9 +14,8 @@ import Footer from "@/components/custom/footer";
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
   return (
-    // <main className="flex min-h-screen flex-col items-center justify-between bg-[url('/slider2_1240x450-min.jpg')] bg-cover bg-center">
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none">
-      <CardHeader className="bg-[url('/background-header.png')] h-[40px] flex justify-center">
+      <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-20">
@@ -27,7 +26,6 @@ const QRScanner = () => {
         <Footer activeItem="/qr-scanner" />
       </CardFooter>
     </Card>
-    // </main>
   );
 };
 

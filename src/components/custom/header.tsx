@@ -16,7 +16,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ content }) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mt-4">
       <div className="flex items-center">
         <Avatar className="mr-2 border-2">
           <AvatarImage src="https://github.com/shadcn.png" />
@@ -31,10 +31,14 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="outline" size="icon" className="mr-1 relative">
-              <GoDotFill className="absolute right-1 top-1 text-primary" />
+              <div className="absolute right-[3px] top-[3px] ">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
+              </div>
               <div className=" p-1">
                 <Bell className="h-[1.2rem] w-[1.2rem]" />
-                <span className="sr-only">Toggle Bell</span>
               </div>
             </Button>
           </PopoverTrigger>
@@ -49,8 +53,6 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
             </div>
           </PopoverContent>
         </Popover>
-
-        <ModeToggle />
       </div>
     </div>
   );

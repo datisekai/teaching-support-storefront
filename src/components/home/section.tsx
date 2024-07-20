@@ -44,7 +44,7 @@ const Section: React.FC<SectionProps> = ({ content }) => {
           return <ItemSection content={item} key={index} />;
         })}
       </div>
-      <Separator className="my-2" />
+      <Separator className="my-4" />
     </div>
   );
 };
