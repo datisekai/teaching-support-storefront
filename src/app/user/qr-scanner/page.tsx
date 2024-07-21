@@ -74,10 +74,9 @@ const QRScanner = () => {
         user_id: user.id,
       });
       toast({
-        variant: "destructive",
+        variant: "default",
         description: room + "",
       });
-      console.log("joined successfully", room);
     } catch (error) {
       toast({
         variant: "destructive",
