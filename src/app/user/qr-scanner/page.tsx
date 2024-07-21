@@ -73,10 +73,11 @@ const QRScanner = () => {
           name: user.name,
           user_id: user.id,
         });
-        alert("joined successfully", room);
+        alert("joined successfully" + room);
         console.log("joined successfully", room);
       }
     } catch (error) {
+      alert("joined successfully" + error);
       console.error("Error: ", error);
     }
   };
