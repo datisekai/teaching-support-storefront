@@ -24,7 +24,7 @@ const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
 
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
-  const [device, setDevice] = useState("");
+  const [device, setDevice] = useState("-1");
 
   useEffect(() => {
     const checkCameraAvailability = async () => {
