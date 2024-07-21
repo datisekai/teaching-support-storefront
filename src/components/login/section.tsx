@@ -17,8 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
-import AuthService from "@/services/auth.services";
 import { setCookieServer } from "@/utils";
+import { login } from "@/actions/auth.action";
 
 const formSchema = z.object({
   code: z
@@ -46,27 +46,27 @@ const Section = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const data = await AuthService.login({
-      code: values.code,
-      password: values.password,
-    });
-    if (!data) {
-      toast({
-        variant: "destructive",
-        description: "Sai tài khoản hoặc mật khẩu.",
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    startTransition(async () => {
+      const data = await login({
+        code: values.code,
+        password: values.password,
       });
-      return;
-    }
-    startTransition(() => {
-      setCookieServer("tsp_token", data.token);
-    });
 
-    toast({
-      className: "bg-success",
-      description: "Đăng nhập thành công.",
+      if (!data) {
+        toast({
+          variant: "destructive",
+          description: "Sai tài khoản hoặc mật khẩu.",
+        });
+        return;
+      }
+
+      toast({
+        className: "bg-success",
+        description: "Đăng nhập thành công.",
+      });
+      router.push("/user");
     });
-    router.push("/user");
   };
   return (
     <Form {...form}>

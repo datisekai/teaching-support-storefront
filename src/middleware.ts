@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { SERVER_URL } from "./constant";
+import { COOKIE_TOKEN, SERVER_URL } from "./constants";
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get("lg");
+  const token = request.cookies.get(COOKIE_TOKEN);
 
   const url = request.nextUrl.clone();
 
@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
     const data = await response.json();
     if (!data.data && url.pathname !== "/login") {
       const response = NextResponse.redirect(new URL("/login", request.url));
-      response.cookies.delete("lg");
+      response.cookies.delete(COOKIE_TOKEN);
       return response;
     }
     if (url.pathname === "/login") {
