@@ -60,7 +60,7 @@ const QRScanner = () => {
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-12">
         <div className="flex flex-col justify-center items-center mb-4">
-          <Select onValueChange={(value) => handleChange(value)}>
+          <Select onValueChange={(value) => handleChange(value)} value={device}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn camera..." />
             </SelectTrigger>
