@@ -31,7 +31,7 @@ const QRScanner = () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const cameras = devices.filter(
-          (device) => device.kind === "videoinput"
+          (device) => device.kind === "videoinput" && device.deviceId
         );
         if (cameras.length === 0) {
           console.error("No cameras found.");
@@ -53,6 +53,8 @@ const QRScanner = () => {
     setDevice(value);
   };
 
+  console.log(cameras);
+
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
       <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
@@ -60,9 +62,9 @@ const QRScanner = () => {
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-12">
         <div className="flex flex-col justify-center items-center mb-4">
-          <Select onValueChange={(value) => handleChange(value)} value={device}>
+          <Select value={device} onValueChange={(value) => handleChange(value)}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Chọn camera..." />
+              <SelectValue placeholder="Chọn camera..." defaultValue={"-1"} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
