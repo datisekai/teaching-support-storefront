@@ -23,6 +23,7 @@ import useUserStore from "@/stores/userStore";
 import * as Colyseus from "colyseus.js";
 import { jwtDecode } from "jwt-decode";
 import { SERVER_REALTIME_URL } from "@/constants";
+import { useToast } from "@/components/ui/use-toast";
 
 interface DecodedToken {
   roomId: number;
@@ -36,7 +37,6 @@ interface DecodedToken {
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
   const user = useUserStore((state) => state.user);
-  const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
 
   let client = new Colyseus.Client(SERVER_REALTIME_URL);
 
@@ -62,24 +62,27 @@ const QRScanner = () => {
 
     checkCameraAvailability();
   }, []);
+  const { toast } = useToast();
 
   const handleClick = async (result: IDetectedBarcode[]) => {
     try {
-      const decoded: DecodedToken = jwtDecode(result[0].rawValue);
-      setDecodedToken(decoded);
-      if (decodedToken?.room_socket_id) {
-        const room = await client.joinById(decodedToken.room_socket_id, {
-          qr_key: result[0].rawValue,
-          code: user.code,
-          name: user.name,
-          user_id: user.id,
-        });
-        alert("joined successfully" + room);
-        console.log("joined successfully", room);
-      }
+      const decoded = jwtDecode(result[0].rawValue) as DecodedToken;
+      const room = await client.joinById(decoded.room_socket_id, {
+        qr_key: result[0].rawValue,
+        code: user.code,
+        name: user.name,
+        user_id: user.id,
+      });
+      toast({
+        variant: "destructive",
+        description: room + "",
+      });
+      console.log("joined successfully", room);
     } catch (error) {
-      alert("joined successfully" + error);
-      console.error("Error: ", error);
+      toast({
+        variant: "destructive",
+        description: error + "",
+      });
     }
   };
   const handleChange = (value: string) => {
