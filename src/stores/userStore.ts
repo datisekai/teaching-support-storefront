@@ -1,13 +1,21 @@
-// stores/userStore.ts
-import create from "zustand";
+import { create } from "zustand";
+
+export interface IUser {
+  id: number;
+  code: string;
+  email: string;
+  role: string;
+  active: boolean;
+  name: string;
+}
 
 interface UserState {
-  user: any;
-  setUser: (user: any) => void;
+  user: IUser;
+  setUser: (user: IUser) => void;
 }
 
 const useUserStore = create<UserState>((set) => ({
-  user: null,
+  user: {} as IUser,
   setUser: (user) => set({ user }),
 }));
 

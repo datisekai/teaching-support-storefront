@@ -2,36 +2,28 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { COOKIE_TOKEN, SERVER_URL } from "./constants";
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get(COOKIE_TOKEN);
+  const token = request.cookies.get(COOKIE_TOKEN)?.value;
 
-  const url = request.nextUrl.clone();
+  const url = request.nextUrl;
 
-  if (!token && !url.pathname.startsWith("/login")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  console.log(token, url.pathname);
+
+  if (url.pathname == "/login") {
+    if (token) {
+      return NextResponse.redirect(new URL("/user", request.url));
+    }
+    return NextResponse.next();
   }
 
   if (token) {
-    const response = await fetch(`${SERVER_URL}/api.user/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.value}`,
-      },
-    });
-    const data = await response.json();
-    if (!data.data && url.pathname !== "/login") {
-      const response = NextResponse.redirect(new URL("/login", request.url));
-      response.cookies.delete(COOKIE_TOKEN);
-      return response;
-    }
-    if (url.pathname === "/login") {
-      return NextResponse.redirect(new URL("/user", request.url));
-    }
+    console.log("called");
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
   matcher: ["/user/:path*", "/login"],
+  // matcher: [],
 };

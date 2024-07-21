@@ -1,7 +1,9 @@
 "use server";
 
-import { COOKIE_TOKEN, SERVER_URL } from "@/constants";
-import { myFetch, setCookieServer } from "@/utils";
+import { COOKIE_TOKEN, COOKIE_USER, SERVER_URL } from "@/constants";
+import { setCookieServer } from "@/utils";
+import { myFetch } from "@/utils/myFetch";
+import { cookies } from "next/headers";
 
 interface ILogin {
   code: string;
@@ -27,6 +29,7 @@ export async function login(payload: ILogin) {
 export async function getMyInfo() {
   const response = await myFetch("/api.user/me");
   const data = await response.json();
+  cookies().set(COOKIE_USER, JSON.stringify(data.data.user));
 
-  return data.data;
+  return data.data.user;
 }

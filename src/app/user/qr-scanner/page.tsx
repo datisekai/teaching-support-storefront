@@ -19,9 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useUserStore from "@/stores/userStore";
 
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
+  const user = useUserStore((state) => state.user);
+  console.log("user", user);
 
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
   const [device, setDevice] = useState("-1");
