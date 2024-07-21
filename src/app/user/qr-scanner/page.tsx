@@ -22,6 +22,7 @@ import {
 import useUserStore from "@/stores/userStore";
 import * as Colyseus from "colyseus.js";
 import { jwtDecode } from "jwt-decode";
+import { SERVER_REALTIME_URL } from "@/constants";
 
 interface DecodedToken {
   roomId: number;
@@ -37,7 +38,7 @@ const QRScanner = () => {
   const user = useUserStore((state) => state.user);
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
 
-  let client = new Colyseus.Client("ws://localhost:2567");
+  let client = new Colyseus.Client(SERVER_REALTIME_URL);
 
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
   const [device, setDevice] = useState("-1");
@@ -87,7 +88,7 @@ const QRScanner = () => {
 
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
-      <CardHeader className="px-4  h-[40px] flex justify-center">
+      <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-12">
