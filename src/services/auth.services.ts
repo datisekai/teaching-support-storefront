@@ -1,4 +1,5 @@
 import { SERVER_URL } from "@/constant";
+import { getCookieServer, myFetch } from "@/utils";
 
 const AuthService = {
   login: async (payload: any) => {
@@ -13,14 +14,8 @@ const AuthService = {
 
     return data.data;
   },
-  me: async (token: string) => {
-    const response = await fetch(`${SERVER_URL}/api.user/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  me: async () => {
+    const response = await myFetch("/api.user/me");
     const data = await response.json();
 
     return data.data;

@@ -53,8 +53,6 @@ const QRScanner = () => {
     setDevice(value);
   };
 
-  console.log(cameras);
-
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
       <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">

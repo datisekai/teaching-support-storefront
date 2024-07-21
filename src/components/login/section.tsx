@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { startTransition } from "react";
+import { useTransition } from "react";
 import {
   Form,
   FormControl,
@@ -12,12 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import Cookies from "js-cookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import AuthService from "@/services/auth.services";
+import { setCookieServer } from "@/utils";
+
 const formSchema = z.object({
   code: z
     .string()
@@ -35,6 +37,7 @@ const formSchema = z.object({
 const Section = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,7 +58,10 @@ const Section = () => {
       });
       return;
     }
-    Cookies.set("lg", data.token);
+    startTransition(() => {
+      setCookieServer("tsp_token", data.token);
+    });
+
     toast({
       className: "bg-success",
       description: "Đăng nhập thành công.",
