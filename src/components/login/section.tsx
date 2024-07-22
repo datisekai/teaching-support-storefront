@@ -65,7 +65,7 @@ const Section = () => {
         className: "bg-success",
         description: "Đăng nhập thành công.",
       });
-      router.push("/user");
+      router.push("/");
     });
   };
   return (

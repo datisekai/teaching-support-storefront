@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
 
   if (url.pathname == "/login") {
     if (token) {
-      return NextResponse.redirect(new URL("/user", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
     return NextResponse.next();
   }
@@ -24,6 +24,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/user/:path*", "/login"],
-  // matcher: [],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images).*)"],
 };

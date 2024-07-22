@@ -53,7 +53,7 @@ const HomePage = () => {
   return (
     <Card className="h-[100vh] md:w-[60vh] w-full rounded-none border-none">
       <ScrollArea className="h-[calc(100vh-64px)] ">
-        <CardHeader className="bg-[url('/background-header.png')] h-[160px] ">
+        <CardHeader className="bg-[url('/images/background-header.png')] h-[160px] ">
           <Header content={user} />
         </CardHeader>
         <CardContent className="pb-1 ">
@@ -74,7 +74,7 @@ const HomePage = () => {
         </CardContent>
       </ScrollArea>
       <CardFooter className="p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
-        <Footer activeItem="/user" />
+        <Footer activeItem="/" />
       </CardFooter>
     </Card>
   );

@@ -6,7 +6,7 @@ import { BsQrCodeScan } from "react-icons/bs";
 type FooterProps = {
   activeItem?: string;
 };
-const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
+const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
   const router = useRouter();
 
   const handleClick = (url: string) => {
@@ -16,9 +16,9 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
     <div className="bg-white flex items-center h-full w-full px-2">
       <div
         className={`w-1/5 flex flex-col items-center ${
-          activeItem === "/user" ? "text-primary" : "text-slate-500"
+          activeItem === "/" ? "text-primary" : "text-slate-500"
         }`}
-        onClick={() => handleClick("/user")}
+        onClick={() => handleClick("")}
       >
         <House width={24} height={24} />
         <p className="text-xs ">Trang chủ</p>
@@ -26,9 +26,9 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
 
       <div
         className={`w-1/5 flex flex-col items-center ${
-          activeItem === "/user/qr-scanner1" ? "text-primary" : "text-slate-500"
+          activeItem === "/qr-scanner1" ? "text-primary" : "text-slate-500"
         }`}
-        onClick={() => handleClick("/user/qr-scanner1")}
+        onClick={() => handleClick("/qr-scanner1")}
       >
         <House width={24} height={24} />
         <p className="text-xs ">Trang chủ</p>
@@ -36,9 +36,9 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/user" }) => {
 
       <div
         className={`w-1/5 flex justify-center items-center pb-2 ${
-          activeItem === "/user/qr-scanner" ? "text-primary" : "text-slate-500"
+          activeItem === "/qr-scanner" ? "text-primary" : "text-slate-500"
         }`}
-        onClick={() => handleClick("/user/qr-scanner")}
+        onClick={() => handleClick("/qr-scanner")}
       >
         <div className="bg-primary rounded-full p-2">
           <BsQrCodeScan className="w-8 h-8 text-white" />

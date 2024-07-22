@@ -90,7 +90,7 @@ const QRScanner = () => {
 
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
-      <CardHeader className="px-4 bg-[url('/background-header.png')] h-[40px] flex justify-center">
+      <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-12">

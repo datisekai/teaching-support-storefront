@@ -9,7 +9,7 @@ const ItemSection: React.FC<ItemSectionProps> = ({ content }) => {
     <div className="flex  border-b-2 py-2 last:border-none">
       <div className="aspect-square ">
         <Image
-          src="/icons8-page-80.png"
+          src="/images/icons8-page-80.png"
           alt="Image"
           className="rounded-md object-cover"
           width={120}

@@ -15,7 +15,7 @@ const SectionTop: React.FC<SectionTopProps> = ({ content }) => {
   return (
     <div
       className="flex flex-col items-center justify-center mr-4"
-      onClick={() => handleClick("/user/attendance-history")}
+      onClick={() => handleClick("/attendance-history")}
     >
       {content.image}
       <p className="text-sm">{content.name}</p>
