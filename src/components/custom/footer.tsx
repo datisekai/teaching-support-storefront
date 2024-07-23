@@ -3,6 +3,8 @@ import { House, QrCode, Settings } from "lucide-react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BsQrCodeScan } from "react-icons/bs";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { LuUserCheck } from "react-icons/lu";
 type FooterProps = {
   activeItem?: string;
 };
@@ -18,7 +20,7 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
         className={`w-1/5 flex flex-col items-center ${
           activeItem === "/" ? "text-primary" : "text-slate-500"
         }`}
-        onClick={() => handleClick("")}
+        onClick={() => handleClick("/")}
       >
         <House width={24} height={24} />
         <p className="text-xs ">Trang chủ</p>
@@ -30,8 +32,8 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
         }`}
         onClick={() => handleClick("/qr-scanner1")}
       >
-        <House width={24} height={24} />
-        <p className="text-xs ">Trang chủ</p>
+        <LuUserCheck className="text-[24px]" />
+        <p className="text-xs ">Lịch sử</p>
       </div>
 
       <div
@@ -50,8 +52,8 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
           activeItem === "/setting1" ? "text-primary" : "text-slate-500"
         }`}
       >
-        <Settings width={24} height={24} />
-        <p className="text-xs ">Cài đặt</p>
+        <IoNewspaperOutline className="text-[24px]" />
+        <p className="text-xs ">Tin tức</p>
       </div>
 
       <div

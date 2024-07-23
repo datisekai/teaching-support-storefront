@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ModeToggle } from "@/components/custom/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,22 +10,24 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import useUserStore from "@/stores/userStore";
 
 interface HeaderProps {
   content: any;
 }
 
 const Header: React.FC<HeaderProps> = ({ content }) => {
+  const user = useUserStore((state) => state.user);
   return (
     <div className="flex justify-between items-center mt-4">
       <div className="flex items-center">
         <Avatar className="mr-2 border-2">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={user.avatar} />
           <AvatarFallback>US</AvatarFallback>
         </Avatar>
         <div className="">
-          <p className="font-bold text-[#FCFDFC] mb-1">{content.name}</p>
-          <p className="text-xs text-[#FCFDFC]">{content.mssv}</p>
+          <p className="font-bold text-[#FCFDFC] mb-1">{user.name}</p>
+          <p className="text-xs text-[#FCFDFC]">{user.code}</p>
         </div>
       </div>
       <div className="flex items-center">

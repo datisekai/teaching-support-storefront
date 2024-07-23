@@ -1,3 +1,4 @@
+import { getAttendanceHistory } from "@/actions/attendance.action";
 import Section from "@/components/attendance-history/section";
 import SectionTop from "@/components/attendance-history/section-top";
 import Footer from "@/components/custom/footer";
@@ -9,47 +10,11 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Attendance } from "@/types/AttendanceModel";
 import React from "react";
 
-const AttendanceHistory = () => {
-  const arr = [
-    {
-      id: 123456,
-      date: "29/12/2s099",
-      subjectName: "Phát triển ứng dụng trên thiết bị di động nâng cao",
-      user: { name: "Nguyễn văn a", avatar: "https://github.com/shadcn.png" },
-      timeStart: "6",
-      timeCount: "5",
-      status: "1",
-    },
-    {
-      id: 123456,
-      date: "29/12/20q99",
-      subjectName: "Phát triển ứng dụng trên thiết bị di động nâng cao",
-      user: { name: "Nguyễn văn a", avatar: "https://github.com/shadcn.png" },
-      timeStart: "6",
-      timeCount: "5",
-      status: "0",
-    },
-    {
-      id: 123456,
-      date: "29/12/20919",
-      subjectName: "Phát triển ứng dụng trên thiết bị di động nâng cao",
-      user: { name: "Nguyễn văn a", avatar: "https://github.com/shadcn.png" },
-      timeStart: "6",
-      timeCount: "5",
-      status: "1",
-    },
-    {
-      id: 123456,
-      date: "29/12/20199",
-      subjectName: "Phát triển ứng dụng trên thiết bị di động nâng cao",
-      user: { name: "Nguyễn văn a", avatar: "https://github.com/shadcn.png" },
-      timeStart: "6",
-      timeCount: "5",
-      status: "1",
-    },
-  ];
+const AttendanceHistory = async () => {
+  const contents = await getAttendanceHistory();
   const content = { id: 1, title: "Lịch sử điểm danh" };
   return (
     <Card className="h-[100vh] md:w-[60vh] w-full rounded-none bg-secondary border-none">
@@ -59,7 +24,7 @@ const AttendanceHistory = () => {
       <CardContent className="px-0">
         <ScrollArea className="h-[calc(100vh-40px)] ">
           <SectionTop />
-          {arr.map((item, index) => {
+          {contents.map((item: Attendance, index: number) => {
             return <Section content={item} key={index} />;
           })}
         </ScrollArea>

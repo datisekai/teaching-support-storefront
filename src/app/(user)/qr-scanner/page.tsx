@@ -40,28 +40,32 @@ const QRScanner = () => {
 
   let client = new Colyseus.Client(SERVER_REALTIME_URL);
 
-  const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
-  const [device, setDevice] = useState("-1");
+  // const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
+  // const [device, setDevice] = useState("-1");
 
-  useEffect(() => {
-    const checkCameraAvailability = async () => {
-      try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const cameras = devices.filter(
-          (device) => device.kind === "videoinput" && device.deviceId
-        );
-        if (cameras.length === 0) {
-          console.error("No cameras found.");
-          return;
-        }
-        setCameras(cameras);
-      } catch (error) {
-        console.error("Error checking camera availability:", error);
-      }
-    };
+  // const [toastDevice, setToastDevice] = useState("");
 
-    checkCameraAvailability();
-  }, []);
+  // useEffect(() => {
+  //   const checkCameraAvailability = async () => {
+  //     try {
+  //       const devices = await navigator.mediaDevices.enumerateDevices();
+  //       const cameras = devices.filter(
+  //         (device) => device.kind === "videoinput" && device.deviceId
+  //       );
+  //       if (cameras.length === 0) {
+  //         console.error("No cameras found.");
+  //         setToastDevice("Cấp quyền truy cập camera và tải lại trang!");
+  //         return;
+  //       }
+  //       setCameras(cameras);
+  //     } catch (error) {
+  //       setToastDevice("Kiểm tra lại camera và tải lại trang!");
+  //       console.error("Error checking camera availability:", error);
+  //     }
+  //   };
+
+  //   checkCameraAvailability();
+  // }, []);
   const { toast } = useToast();
 
   const handleClick = async (result: IDetectedBarcode[]) => {
@@ -75,26 +79,26 @@ const QRScanner = () => {
       });
       toast({
         variant: "default",
-        description: room + "",
+        title: "Điểm danh thành công.",
       });
     } catch (error) {
       toast({
         variant: "destructive",
-        description: error + "",
+        title: "Điểm danh thất bại.",
       });
     }
   };
-  const handleChange = (value: string) => {
-    setDevice(value);
-  };
+  // const handleChange = (value: string) => {
+  //   setDevice(value);
+  // };
 
   return (
     <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
-      <CardContent className="flex flex-col items-center justify-between mt-12">
-        <div className="flex flex-col justify-center items-center mb-4">
+      <CardContent className="flex flex-col items-center justify-between mt-20">
+        {/* <div className="flex flex-col justify-center items-center mb-4">
           <Select value={device} onValueChange={(value) => handleChange(value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Chọn camera..." defaultValue={"-1"} />
@@ -112,18 +116,18 @@ const QRScanner = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-        </div>
-        {cameras.length === 0 && (
+        </div> */}
+        {/* {cameras.length === 0 && (
           <div className="items-center text-destructive text-center">
-            Cấp quyền truy cập hoặc kiểm tra lại camera và tải lại trang!
+            {toastDevice}
           </div>
-        )}
+        )} */}
         <div className="items-center">Hướng camera về phía mã QR</div>
         <Scanner
           components={{
             onOff: true,
           }}
-          constraints={{ deviceId: device }}
+          // constraints={{ deviceId: device }}
           onScan={(result) => handleClick(result)}
         />
       </CardContent>

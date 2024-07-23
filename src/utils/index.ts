@@ -1,4 +1,5 @@
 "use server";
+import moment from "moment";
 import { cookies } from "next/headers";
 // import { getCookie, setCookie } from "cookies-next";
 
@@ -14,4 +15,7 @@ export async function getCookieServer(name: string) {
 export async function getObjectCookieServer(name: string) {
   const data = cookies().get(name)?.value;
   return data ? JSON.parse(data) : {};
+}
+export async function formattedDate(dateString: string) {
+  return moment(dateString).format("DD/MM/YYYY HH:mm:ss");
 }

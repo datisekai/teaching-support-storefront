@@ -7,6 +7,7 @@ export interface IUser {
   role: string;
   active: boolean;
   name: string;
+  avatar: string;
 }
 
 interface UserState {

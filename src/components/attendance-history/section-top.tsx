@@ -38,54 +38,15 @@ export const works: Artwork[] = [
   },
 ];
 const SectionTop = () => {
-  const data = [
-    { id: 0, title: "Tất cả" },
-    { id: 1, title: "Thành công" },
-    { id: 2, title: "Cảnh báo" },
-    { id: 3, title: "Thất bại" },
-  ];
   const [active, setActive] = useState<Number>(0);
   const handleClick = (id: Number) => {
     setActive(id);
   };
   return (
-    <>
-      <ScrollArea className="md:w-[60vh] w-screen whitespace-nowrap">
-        <div className="border-b-[1px] border-slate-200 flex items-center px-4 pt-2 gap-4 bg-white">
-          {data.map((item, index) => {
-            return (
-              <div
-                className="relative flex flex-col justify-center items-center"
-                key={index}
-                onClick={() => handleClick(item.id)}
-              >
-                <div
-                  className={`mx-auto text-sm font-normal mb-1 ${
-                    active === item.id ? "text-primary" : ""
-                  }`}
-                >
-                  {item.title}
-                </div>
-                <div
-                  className={`h-[2px] transition-all duration-300 ease-in-out ${
-                    active === item.id
-                      ? "bg-primary w-6 mx-auto"
-                      : "bg-transparent w-0"
-                  }`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
-
-      <div className="bg-white px-4 py-2 mb-4">
-        <DatePickerWithRange className="w-full mb-2" />
-        <Input type="search" placeholder="Nhập mã/ tên môn học..." />
-      </div>
-    </>
+    <div className="bg-white px-4 py-2 mb-4">
+      <DatePickerWithRange className="w-full mb-2" />
+      <Input type="search" placeholder="Nhập mã/ tên môn học..." />
+    </div>
   );
 };
 
