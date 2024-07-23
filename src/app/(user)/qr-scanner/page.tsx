@@ -97,7 +97,7 @@ const QRScanner = () => {
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
-      <CardContent className="flex flex-col items-center justify-between mt-20">
+      <CardContent className="flex flex-col items-center justify-between mt-20 ">
         {/* <div className="flex flex-col justify-center items-center mb-4">
           <Select value={device} onValueChange={(value) => handleChange(value)}>
             <SelectTrigger className="w-[180px]">

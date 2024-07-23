@@ -56,7 +56,7 @@ const HomePage = () => {
         <CardHeader className="bg-[url('/images/background-header.png')] h-[160px] ">
           <Header content={user} />
         </CardHeader>
-        <CardContent className="pb-1 ">
+        <CardContent className="pb-20 ">
           <div className="relative">
             <Section1 />
             <div className="pt-24">

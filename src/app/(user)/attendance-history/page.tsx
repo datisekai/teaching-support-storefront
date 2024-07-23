@@ -21,7 +21,7 @@ const AttendanceHistory = async () => {
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} />
       </CardHeader>
-      <CardContent className="px-0">
+      <CardContent className="pb-20 ">
         <ScrollArea className="h-[calc(100vh-40px)] ">
           <SectionTop />
           {contents.map((item: Attendance, index: number) => {
