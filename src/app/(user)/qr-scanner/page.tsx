@@ -24,7 +24,7 @@ import * as Colyseus from "colyseus.js";
 import { jwtDecode } from "jwt-decode";
 import { SERVER_REALTIME_URL } from "@/constants";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface DecodedToken {
   roomId: number;
