@@ -24,9 +24,15 @@ const AttendanceHistory = async () => {
       <CardContent className="px-0 pb-20 ">
         <ScrollArea className="h-[calc(100vh-40px)] ">
           <SectionTop />
-          {contents.map((item: Attendance, index: number) => {
-            return <Section content={item} key={index} />;
-          })}
+          {contents ? (
+            contents.map((item: Attendance, index: number) => {
+              return <Section content={item} key={index} />;
+            })
+          ) : (
+            <div className="flex justify-center content-center mt-28">
+              Chưa có lần điểm danh nào
+            </div>
+          )}
         </ScrollArea>
       </CardContent>
     </Card>

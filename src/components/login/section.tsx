@@ -56,13 +56,15 @@ const Section = () => {
       if (!data) {
         toast({
           variant: "destructive",
+          className: "text-white",
           title: "Sai tài khoản hoặc mật khẩu.",
         });
         return;
       }
 
       toast({
-        className: "bg-success",
+        variant: "default",
+        className: "bg-success text-white",
         title: "Đăng nhập thành công.",
       });
       router.push("/");

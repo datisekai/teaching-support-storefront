@@ -24,6 +24,7 @@ import * as Colyseus from "colyseus.js";
 import { jwtDecode } from "jwt-decode";
 import { SERVER_REALTIME_URL } from "@/constants";
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/router";
 
 interface DecodedToken {
   roomId: number;
@@ -39,6 +40,7 @@ const QRScanner = () => {
   const user = useUserStore((state) => state.user);
 
   let client = new Colyseus.Client(SERVER_REALTIME_URL);
+  const router = useRouter();
 
   // const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
   // const [device, setDevice] = useState("-1");
@@ -79,11 +81,14 @@ const QRScanner = () => {
       });
       toast({
         variant: "default",
+        className: "bg-success text-white",
         title: "Điểm danh thành công.",
       });
+      router.push("/attendance-history");
     } catch (error) {
       toast({
         variant: "destructive",
+        className: "text-white",
         title: "Điểm danh thất bại.",
       });
     }
