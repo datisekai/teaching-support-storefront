@@ -89,7 +89,7 @@ const QRScanner = () => {
       toast({
         variant: "destructive",
         className: "text-white",
-        title: "Điểm danh thất bại.",
+        title: "Điểm danh thất bại." + error,
       });
     }
   };
