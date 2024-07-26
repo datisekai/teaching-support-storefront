@@ -14,6 +14,7 @@ import Section1 from "@/components/home/section1";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { LuUserCheck } from "react-icons/lu";
 import { PiRankingLight } from "react-icons/pi";
+import { MdOutlineAssignment } from "react-icons/md";
 
 const HomePage = () => {
   const user = { id: 1, name: "Nguyễn Hải Dương", mssv: "3120410103" };
@@ -46,6 +47,15 @@ const HomePage = () => {
       image: (
         <div className="rounded-full bg-[#FEF4EB] p-2">
           <PiRankingLight className="text-[24px] text-[#ffaf6d]" />
+        </div>
+      ),
+    },
+    {
+      id: 4,
+      name: "Kiểm tra",
+      image: (
+        <div className="rounded-full bg-[#FEF4EB] p-2">
+          <MdOutlineAssignment className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
     },

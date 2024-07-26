@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { BsQrCodeScan } from "react-icons/bs";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { LuUserCheck } from "react-icons/lu";
+import { MdOutlineAssignment } from "react-icons/md";
+
 type FooterProps = {
   activeItem?: string;
 };
@@ -52,8 +54,8 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
           activeItem === "/setting1" ? "text-primary" : "text-slate-500"
         }`}
       >
-        <IoNewspaperOutline className="text-[24px]" />
-        <p className="text-xs ">Tin tức</p>
+        <MdOutlineAssignment className="text-[24px]" />
+        <p className="text-xs ">Kiểm tra</p>
       </div>
 
       <div
