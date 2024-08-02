@@ -86,7 +86,9 @@ const QRScanner = () => {
         className: "bg-success text-white",
         title: "Điểm danh thành công.",
       });
-      router.push("/attendance-history");
+      setTimeout(() => {
+        router.push("/attendance-history");
+      }, 2000);
     } catch (error) {
       toast({
         variant: "destructive",

@@ -19,3 +19,8 @@ export async function getObjectCookieServer(name: string) {
 export async function formattedDate(dateString: string) {
   return moment.utc(dateString).local().format("DD/MM/YYYY HH:mm:ss");
 }
+
+export async function deleteCookieServer(name: string) {
+  cookies().delete(name);
+  // setCookie(name, value, { cookies });
+}

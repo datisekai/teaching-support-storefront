@@ -16,21 +16,23 @@ const SectionAbsolute = async () => {
       </div>
       <div className="border-b-2 bg-secondary "></div>
       <div className="py-4 ">
-        <div className="grid grid-cols-4 pb-1">
-          <div className="col-span-1 text-sm font-bold">Môn:</div>
-          <div className="col-span-3 text-sm ">
+        <div className="grid grid-cols-6 pb-1">
+          <div className="col-span-2 text-sm font-bold">Môn:</div>
+          <div className="col-span-4 text-sm truncate ">
             {contents[0].room.group.course.name}
           </div>
         </div>
-        <div className="grid grid-cols-4 pb-1">
-          <div className="col-span-1 text-sm font-bold">Nhóm lớp:</div>
-          <div className="col-span-3 text-sm">
+        <div className="grid grid-cols-6 pb-1">
+          <div className="col-span-2 text-sm font-bold">Nhóm lớp:</div>
+          <div className="col-span-4 text-sm truncate ">
             {contents[0].room.group.name}
           </div>
         </div>
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 text-sm font-bold">Trạng thái:</div>
-          <div className="col-span-3 text-sm">
+        <div className="grid grid-cols-6">
+          <div className="col-span-2 text-sm font-bold truncate ">
+            Trạng thái:
+          </div>
+          <div className="col-span-4 text-sm">
             {contents[0].success ? "Thành công" : "Thất bại"}
           </div>
         </div>

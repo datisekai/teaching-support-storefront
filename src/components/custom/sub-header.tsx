@@ -14,6 +14,10 @@ const SubHeader: React.FC<SubHeaderProps> = ({ content, iconRight }) => {
   const handleClick = () => {
     router.back();
   };
+
+  const handleRouter = (url: string) => {
+    router.push(url);
+  };
   return (
     <div className="flex justify-between items-center text-white">
       <div className="flex items-center">
@@ -23,7 +27,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ content, iconRight }) => {
         />
         <div className="text-sm font-bold">{content.title}</div>
       </div>
-      <div>{iconRight}</div>
+      <div onClick={() => handleRouter("/account-setting")}>{iconRight}</div>
     </div>
   );
 };
