@@ -70,6 +70,8 @@ const QRScanner = () => {
   // }, []);
   const { toast } = useToast();
 
+  console.log("test deploy");
+
   const handleClick = async (result: IDetectedBarcode[]) => {
     try {
       const decoded = jwtDecode(result[0].rawValue) as DecodedToken;
