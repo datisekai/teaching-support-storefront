@@ -98,9 +98,9 @@ const QRScanner = () => {
   // };
 
   return (
-    <Card className="h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none">
+    <div>
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
-        <SubHeader content={content} />
+        <SubHeader content={content} iconRight={<></>} />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-20 ">
         {/* <div className="flex flex-col justify-center items-center mb-4">
@@ -139,7 +139,7 @@ const QRScanner = () => {
       <CardFooter className="pb-0 p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
         <Footer activeItem="/qr-scanner" />
       </CardFooter>
-    </Card>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ export interface User {
   role: string;
   active: boolean;
   name: string;
-  avatar: string | null;
+  avatar: string;
   device_uid: string | null;
   created_at: string;
   updated_at: string;

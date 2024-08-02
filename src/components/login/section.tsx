@@ -19,6 +19,7 @@ import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import { setCookieServer } from "@/utils";
 import { login } from "@/actions/auth.action";
+import Loading from "@/utils/loading";
 
 const formSchema = z.object({
   code: z
@@ -48,66 +49,79 @@ const Section = () => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     startTransition(async () => {
-      const data = await login({
-        code: values.code,
-        password: values.password,
-      });
+      try {
+        const data = await login({
+          code: values.code,
+          password: values.password,
+        });
 
-      if (!data) {
+        if (!data) {
+          toast({
+            variant: "destructive",
+            className: "text-white",
+            title: "Sai tài khoản hoặc mật khẩu.",
+          });
+          return;
+        }
+
+        toast({
+          variant: "default",
+          className: "bg-success text-white",
+          title: "Đăng nhập thành công.",
+        });
+        router.push("/");
+      } catch (error) {
+        console.log(error);
         toast({
           variant: "destructive",
           className: "text-white",
-          title: "Sai tài khoản hoặc mật khẩu.",
+          title: "Đã xảy ra lỗi khi đăng nhập.",
         });
-        return;
       }
-
-      toast({
-        variant: "default",
-        className: "bg-success text-white",
-        title: "Đăng nhập thành công.",
-      });
-      router.push("/");
     });
   };
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="code"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Mã số sinh viên</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="3120410103" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Mật khẩu</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="******" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button type="submit" className="space-y-2">
-          Đăng nhập
-        </Button>
-      </form>
-    </Form>
+    <>
+      <Loading isLoading={isPending} />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-1">
+            <FormField
+              control={form.control}
+              name="code"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mã số sinh viên</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="3120410103" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="space-y-1">
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mật khẩu</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="******" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button type="submit" className="space-y-2">
+            Đăng nhập
+          </Button>
+        </form>
+      </Form>
+    </>
   );
 };
 

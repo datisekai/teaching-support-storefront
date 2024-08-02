@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 
 import Section from "@/components/login/section";
+import Loading from "@/utils/loading";
 
 const Login = () => {
   return (

@@ -1,4 +1,3 @@
-// Create a Providers component to wrap your application with all the components requiring 'use client', such as next-nprogress-bar or your different contexts...
 "use client";
 
 import React, { useEffect } from "react";
@@ -12,14 +11,20 @@ interface IProvider {
 
 const Providers: React.FC<IProvider> = ({ children }) => {
   const setUser = useUserStore((state) => state.setUser);
+
   useEffect(() => {
     fetchMyInfo();
   }, []);
 
   const fetchMyInfo = async () => {
-    const data = await getMyInfo();
-    setUser(data);
+    try {
+      const data = await getMyInfo();
+      setUser(data);
+    } catch (error) {
+      console.error("Failed to fetch user info:", error);
+    }
   };
+
   return (
     <>
       {children}
@@ -27,7 +32,6 @@ const Providers: React.FC<IProvider> = ({ children }) => {
         height="4px"
         color="#fffd00"
         options={{ showSpinner: false }}
-        shallowRouting
       />
     </>
   );

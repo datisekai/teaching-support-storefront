@@ -20,7 +20,7 @@ export async function login(payload: ILogin) {
 
   const body = await response.json();
   const data = body.data;
-  const token = data.token;
+  const token = data?.token;
   setCookieServer(COOKIE_TOKEN, token);
 
   return data;
@@ -29,7 +29,7 @@ export async function login(payload: ILogin) {
 export async function getMyInfo() {
   const response = await myFetch("/api.user/me");
   const data = await response.json();
-  cookies().set(COOKIE_USER, JSON.stringify(data.data.user));
+  // cookies().set(COOKIE_USER, JSON.stringify(data.data.user));
 
   return data.data.user;
 }

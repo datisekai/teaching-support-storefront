@@ -1,5 +1,5 @@
 "use client";
-import { House, QrCode, Settings } from "lucide-react";
+import { House, QrCode, Settings, UserRound } from "lucide-react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BsQrCodeScan } from "react-icons/bs";
@@ -30,9 +30,11 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
 
       <div
         className={`w-1/5 flex flex-col items-center ${
-          activeItem === "/qr-scanner1" ? "text-primary" : "text-slate-500"
+          activeItem === "/attendance-history"
+            ? "text-primary"
+            : "text-slate-500"
         }`}
-        onClick={() => handleClick("/qr-scanner1")}
+        onClick={() => handleClick("/attendance-history")}
       >
         <LuUserCheck className="text-[24px]" />
         <p className="text-xs ">Lịch sử</p>
@@ -60,11 +62,12 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
 
       <div
         className={`w-1/5 flex flex-col items-center ${
-          activeItem === "/setting" ? "text-primary" : "text-slate-500"
+          activeItem === "/account" ? "text-primary" : "text-slate-500"
         }`}
+        onClick={() => handleClick("/account")}
       >
-        <Settings width={24} height={24} />
-        <p className="text-xs ">Cài đặt</p>
+        <UserRound width={24} height={24} />
+        <p className="text-xs ">Tài khoản</p>
       </div>
     </div>
   );

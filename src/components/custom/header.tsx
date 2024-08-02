@@ -12,11 +12,7 @@ import {
 } from "@/components/ui/popover";
 import useUserStore from "@/stores/userStore";
 
-interface HeaderProps {
-  content: any;
-}
-
-const Header: React.FC<HeaderProps> = ({ content }) => {
+const Header = () => {
   const user = useUserStore((state) => state.user);
   return (
     <div className="flex justify-between items-center mt-4">

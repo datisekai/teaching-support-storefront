@@ -1,22 +1,13 @@
+import { User } from "@/types/UserModel";
 import { create } from "zustand";
 
-export interface IUser {
-  id: number;
-  code: string;
-  email: string;
-  role: string;
-  active: boolean;
-  name: string;
-  avatar: string;
-}
-
 interface UserState {
-  user: IUser;
-  setUser: (user: IUser) => void;
+  user: User;
+  setUser: (user: User) => void;
 }
 
 const useUserStore = create<UserState>((set) => ({
-  user: {} as IUser,
+  user: {} as User,
   setUser: (user) => set({ user }),
 }));
 

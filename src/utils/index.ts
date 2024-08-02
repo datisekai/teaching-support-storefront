@@ -17,5 +17,5 @@ export async function getObjectCookieServer(name: string) {
   return data ? JSON.parse(data) : {};
 }
 export async function formattedDate(dateString: string) {
-  return moment(dateString).format("DD/MM/YYYY HH:mm:ss");
+  return moment.utc(dateString).local().format("DD/MM/YYYY HH:mm:ss");
 }

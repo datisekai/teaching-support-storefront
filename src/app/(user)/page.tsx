@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Section from "@/components/home/section";
 import SectionTop from "@/components/home/section-top";
 import {
@@ -10,14 +10,14 @@ import {
 import Header from "@/components/custom/header";
 import Footer from "@/components/custom/footer";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Section1 from "@/components/home/section1";
+import SectionAbsolute from "@/components/home/section-absolute";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { LuUserCheck } from "react-icons/lu";
 import { PiRankingLight } from "react-icons/pi";
 import { MdOutlineAssignment } from "react-icons/md";
+import Loading from "@/utils/loading";
 
 const HomePage = () => {
-  const user = { id: 1, name: "Nguyễn Hải Dương", mssv: "3120410103" };
   const arr = [
     { id: 1, name: "Tin tức" },
     { id: 2, name: "Phản hồi đơn từ" },
@@ -31,6 +31,7 @@ const HomePage = () => {
           <IoNewspaperOutline className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
+      url: "",
     },
     {
       id: 2,
@@ -40,6 +41,7 @@ const HomePage = () => {
           <LuUserCheck className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
+      url: "/attendance-history",
     },
     {
       id: 3,
@@ -49,6 +51,7 @@ const HomePage = () => {
           <PiRankingLight className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
+      url: "",
     },
     {
       id: 4,
@@ -58,17 +61,20 @@ const HomePage = () => {
           <MdOutlineAssignment className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
+      url: "",
     },
   ];
+
   return (
-    <Card className="h-[100vh] md:w-[60vh] w-full rounded-none border-none">
+    //h-[calc(100vh-64px)] md:w-[60vh] w-full rounded-none border-none
+    <div>
       <ScrollArea className="h-[calc(100vh-64px)] ">
         <CardHeader className="bg-[url('/images/background-header.png')] h-[160px] ">
-          <Header content={user} />
+          <Header />
         </CardHeader>
         <CardContent className="pb-20 ">
           <div className="relative">
-            <Section1 />
+            <SectionAbsolute />
             <div className="pt-24">
               <div className="flex items-center my-4">
                 {arrTop.map((item, index) => {
@@ -86,7 +92,7 @@ const HomePage = () => {
       <CardFooter className="p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
         <Footer activeItem="/" />
       </CardFooter>
-    </Card>
+    </div>
   );
 };
 
