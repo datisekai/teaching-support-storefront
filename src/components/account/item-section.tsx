@@ -8,7 +8,7 @@ interface IITEMSECTION {
 
 const ItemSection: React.FC<IITEMSECTION> = ({ content }) => {
   return (
-    <Card className="text-start mb-4">
+    <Card className="text-start rounded-xl">
       <CardContent className="px-2 pt-2">
         <Heart />
         <div className="mt-2">

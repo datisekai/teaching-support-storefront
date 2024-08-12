@@ -23,6 +23,7 @@ import { House, QrCode, Settings, UserRound } from "lucide-react";
 import SectionTop from "@/components/account/section-top";
 import Section from "@/components/account/section";
 import { useRouter } from "next/navigation";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface DecodedToken {
   roomId: number;
@@ -40,9 +41,11 @@ const Account = () => {
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
         <SubHeader content={content} iconRight={<Settings />} />
       </CardHeader>
-      <CardContent className="mt-2 px-0">
-        <SectionTop />
-        <Section />
+      <CardContent className="px-0 pb-20">
+        <ScrollArea className="h-[calc(100vh-112px)] ">
+          <SectionTop />
+          <Section />
+        </ScrollArea>
       </CardContent>
       <CardFooter className="pb-0 p-0 md:w-[60vh] w-full z-10 h-16 flex items-center justify-between fixed left-1/2 transform -translate-x-1/2 bottom-0 ">
         <Footer activeItem="/qr-scanner" />

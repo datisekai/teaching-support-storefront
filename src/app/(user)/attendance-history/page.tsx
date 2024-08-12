@@ -20,7 +20,7 @@ const AttendanceHistory = () => {
         <SubHeader content={content} iconRight={<></>} />
       </CardHeader>
       <CardContent className="px-0 pb-20 ">
-        <ScrollArea className="h-[calc(100vh-40px)] ">
+        <ScrollArea className="h-[calc(100vh-48px)] ">
           <SectionTop />
           <Section />
         </ScrollArea>

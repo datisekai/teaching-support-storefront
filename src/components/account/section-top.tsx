@@ -15,22 +15,22 @@ const SectionTop = () => {
     { id: 1, title: "Gắn bó cùng trường", decription: "4 năm" },
   ];
   return (
-    <div className="flex flex-col items-center text-center gap-2 bg-[#FEF4EB] w-full">
-      <div className="relative w-20 h-20">
-        <Avatar className="w-20 h-20">
-          <AvatarImage src={user.avatar} alt="" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <Camera className="absolute right-0 bottom-0 bg-primary rounded-full p-1 text-white border-white border-2" />
+    <div className="flex flex-col items-center text-center gap-2 bg-[#FEF4EB] w-full pb-4 mt-2">
+      <div className="mb-2 mt-4">
+        <div className="w-20 h-20 ">
+          <Avatar className="w-20 h-20 border-2 border-primary">
+            <AvatarImage src={user.avatar} alt="" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+
+        <div>
+          <p className="font-bold text-lg">{user.name}</p>
+          <p className="text-sm text-slate-500">{user.code}</p>
+        </div>
       </div>
-      <div>
-        <p className="font-bold text-lg">{user.name}</p>
-        <p className="text-sm text-slate-500">{user.code}</p>
-      </div>
-      <Button variant="outline" className="text-primary border-primary px-8">
-        Xem thông tin
-      </Button>
-      <div className="grid grid-cols-2 gap-2 w-full px-2">
+
+      <div className="grid grid-cols-2 gap-4 w-full px-4">
         {arr.map((item, index) => (
           <ItemSection content={item} key={index} />
         ))}
