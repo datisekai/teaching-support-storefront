@@ -11,6 +11,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import useUserStore from "@/stores/userStore";
+import { getImage } from "@/utils/image";
 
 const Header = () => {
   const user = useUserStore((state) => state.user);
@@ -18,7 +19,10 @@ const Header = () => {
     <div className="flex justify-between items-center mt-4">
       <div className="flex items-center">
         <Avatar className="mr-2 border-2">
-          <AvatarImage src={user.avatar} />
+          <AvatarImage
+            src={getImage(user.avatar)}
+            className="object-cover object-top"
+          />
           <AvatarFallback>US</AvatarFallback>
         </Avatar>
         <div className="">

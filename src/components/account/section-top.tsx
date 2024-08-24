@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import ItemSection from "./item-section";
 import useUserStore from "@/stores/userStore";
+import { getImage } from "@/utils/image";
 
 const SectionTop = () => {
   const user = useUserStore((state) => state.user);
@@ -17,9 +18,13 @@ const SectionTop = () => {
   return (
     <div className="flex flex-col items-center text-center gap-2 bg-[#FEF4EB] w-full pb-4 mt-2">
       <div className="mb-2 mt-4">
-        <div className="w-20 h-20 ">
-          <Avatar className="w-20 h-20 border-2 border-primary">
-            <AvatarImage src={user.avatar} alt="" />
+        <div className="">
+          <Avatar className="w-20 h-20 mx-auto border-2 border-primary">
+            <AvatarImage
+              src={getImage(user.avatar)}
+              alt=""
+              className="object-cover object-top"
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>
