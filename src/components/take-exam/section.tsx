@@ -109,12 +109,8 @@ const Section: React.FC<ISection> = ({ idExam }) => {
                 <p className="text-base font-bold text-primary">{item.title}</p>
                 {item.images.map((item3, index3) => {
                   return (
-                    <div>
-                      <AspectRatio
-                        ratio={16 / 9}
-                        className="bg-muted mb-2"
-                        key={index3}
-                      >
+                    <div key={index3}>
+                      <AspectRatio ratio={16 / 9} className="bg-muted mb-2">
                         {/* <div
                       dangerouslySetInnerHTML={{ __html: item3.link }}
                     ></div> */}
