@@ -10,15 +10,6 @@ import {
 } from "@/components/ui/card";
 import SubHeader from "@/components/custom/sub-header";
 import Footer from "@/components/custom/footer";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import useUserStore from "@/stores/userStore";
 import * as Colyseus from "colyseus.js";
 import { jwtDecode } from "jwt-decode";
@@ -38,6 +29,8 @@ interface DecodedToken {
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
   const user = useUserStore((state) => state.user);
+
+  const [isSuccess, setIsSuccess] = React.useState(false);
 
   let client = new Colyseus.Client(SERVER_REALTIME_URL);
   const router = useRouter();
@@ -86,6 +79,7 @@ const QRScanner = () => {
         className: "bg-success text-white",
         title: "Điểm danh thành công.",
       });
+      setIsSuccess(true);
       setTimeout(() => {
         router.push("/attendance-history");
       }, 2000);
@@ -137,6 +131,7 @@ const QRScanner = () => {
             onOff: true,
           }}
           // constraints={{ deviceId: device }}
+          paused={isSuccess}
           onScan={(result) => handleClick(result)}
         />
       </CardContent>

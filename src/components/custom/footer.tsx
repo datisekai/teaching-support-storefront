@@ -53,8 +53,9 @@ const Footer: React.FC<FooterProps> = ({ activeItem = "/" }) => {
 
       <div
         className={`w-1/5 flex flex-col items-center ${
-          activeItem === "/setting1" ? "text-primary" : "text-slate-500"
+          activeItem === "/test-exam" ? "text-primary" : "text-slate-500"
         }`}
+        onClick={() => handleClick("/test-exam")}
       >
         <MdOutlineAssignment className="text-[24px]" />
         <p className="text-xs ">Kiểm tra</p>
