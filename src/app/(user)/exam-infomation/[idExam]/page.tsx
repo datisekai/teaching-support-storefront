@@ -1,20 +1,22 @@
 import React from "react";
-
 import { CardContent, CardHeader } from "@/components/ui/card";
 import SubHeader from "@/components/custom/sub-header";
 import Section from "@/components/exam-infomation/section";
-import { getExamById, getExamFindByCode } from "@/actions/exam.action";
-import { GetServerSideProps } from "next";
+import { getExamFindByCode } from "@/actions/exam.action";
 
 interface Props {
-  code: string;
+  params: {
+    idExam: string;
+  };
 }
 
-const ExamInfomation: GetServerSideProps<Props> = async (context) => {
-  const content = { id: 1, title: "Thông tin bài kiểm tra" };
-  const { code } = context.params!;
+const ExamInfomation = async ({ params }: Props) => {
+  const { idExam } = params;
 
-  const data = await getExamFindByCode(code);
+  const data = await getExamFindByCode(idExam);
+
+  const content = { id: 1, title: "Thông tin bài kiểm tra" };
+
   return (
     <div>
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
@@ -26,5 +28,9 @@ const ExamInfomation: GetServerSideProps<Props> = async (context) => {
     </div>
   );
 };
+
+export async function generateStaticParams() {
+  return [{ idExam: "example-id" }];
+}
 
 export default ExamInfomation;

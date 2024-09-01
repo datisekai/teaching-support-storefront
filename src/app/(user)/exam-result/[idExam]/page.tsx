@@ -1,21 +1,21 @@
 import React from "react";
-
 import { CardContent, CardHeader } from "@/components/ui/card";
 import SubHeader from "@/components/custom/sub-header";
-
-import { useParams } from "next/navigation";
 import Section from "@/components/exam-result/section";
-import { GetServerSideProps } from "next";
 import { getExamHistory } from "@/actions/exam.action";
-interface Props {
-  idExam: string;
-}
-const ExamInfomation: GetServerSideProps<Props> = async (context) => {
-  const content = { id: 1, title: "Kết quả bài kiểm tra" };
 
-  const { idExam } = context.params!;
+interface Props {
+  params: {
+    idExam: string;
+  };
+}
+
+const ExamInfomation: React.FC<Props> = async ({ params }) => {
+  const { idExam } = params;
 
   const contents = await getExamHistory();
+
+  const content = { id: 1, title: "Kết quả bài kiểm tra" };
 
   return (
     <div>
@@ -28,5 +28,9 @@ const ExamInfomation: GetServerSideProps<Props> = async (context) => {
     </div>
   );
 };
+
+export async function generateStaticParams() {
+  return [{ idExam: "example-id" }];
+}
 
 export default ExamInfomation;
