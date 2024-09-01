@@ -61,7 +61,7 @@ const HomePage = () => {
           <MdOutlineAssignment className="text-[24px] text-[#ffaf6d]" />
         </div>
       ),
-      url: "",
+      url: "/exam-history",
     },
   ];
 

@@ -4,8 +4,9 @@ import { Badge } from "../ui/badge";
 import DropdownMenuCustom from "../custom/dropdown-menu-custom";
 import { Dot } from "lucide-react";
 import { getAttendanceHistory } from "@/actions/attendance.action";
-import { formattedDate } from "@/utils";
+
 import { Attendance } from "@/types/AttendanceModel";
+import { formattedDate } from "@/utils/format";
 interface IITEMSection {
   content: Attendance;
 }

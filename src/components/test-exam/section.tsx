@@ -20,6 +20,14 @@ import { useRouter } from "next/navigation";
 import { setCookieServer } from "@/utils";
 import { login } from "@/actions/auth.action";
 import Loading from "@/utils/loading";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
+import { Separator } from "../ui/separator";
+import { getExamFindByCode } from "@/actions/exam.action";
 
 const formSchema = z.object({
   code: z.string().nonempty({
@@ -39,59 +47,79 @@ const Section = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    router.push(`/exam-infomation/${values.code}`);
-    // startTransition(async () => {
-    //   try {
-    //     const data = await login({
-    //       code: values.code,
-    //     });
-    //     if (!data) {
-    //       toast({
-    //         variant: "destructive",
-    //         className: "text-white",
-    //         title: "Sai tài khoản hoặc mật khẩu.",
-    //       });
-    //       return;
-    //     }
-    //     toast({
-    //       variant: "default",
-    //       className: "bg-success text-white",
-    //       title: "Đăng nhập thành công.",
-    //     });
-    //     router.push("/");
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast({
-    //       variant: "destructive",
-    //       className: "text-white",
-    //       title: "Đã xảy ra lỗi khi đăng nhập.",
-    //     });
-    //   }
-    // });
+    startTransition(async () => {
+      try {
+        const data = await getExamFindByCode(values.code.toString());
+        if (!data) {
+          toast({
+            variant: "destructive",
+            className: "text-white",
+            title: "Bài thi chưa sẵn sàng.",
+          });
+          return;
+        }
+        toast({
+          variant: "default",
+          className: "bg-success text-white",
+          title: "Đang vào bài thi.",
+        });
+        router.push(`/exam-infomation/${data.code}`);
+      } catch (error) {
+        console.log(error);
+        toast({
+          variant: "destructive",
+          className: "text-white",
+          title: "Đã xảy ra lỗi xảy ra.",
+        });
+      }
+    });
   };
 
   return (
     <>
       <Loading isLoading={isPending} />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <div className="space-y-1">
-            <FormField
-              control={form.control}
-              name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mã bài kiểm tra</FormLabel>
-                  <FormControl>
-                    <Input type="text" placeholder="Ví dụ: y5xe83" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        </form>
-      </Form>
+      <div className="min-h-[calc(100vh-64px-48px)] flex flex-col flex-1 justify-center">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-1">
+              <FormField
+                control={form.control}
+                name="code"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mã bài kiểm tra</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Ví dụ: y5xe83"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type="submit">Xác nhận</Button>
+          </form>
+        </Form>
+        <Separator className="mt-6" />
+        <Accordion type="single" collapsible className="w-full ">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Hướng dẫn</AccordionTrigger>
+            <AccordionContent>
+              <div>Bước 1: Nhập mã bài kiểm tra của giang viên cung cấp.</div>
+              <div>
+                Bước 2: Nhấn enter hoặc nút xác nhận để vào làm bài kiểm tra.
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Chưa nhận được mã?</AccordionTrigger>
+            <AccordionContent>Liên hệ cho giảng viên của bạn.</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     </>
   );
 };

@@ -8,7 +8,7 @@ const Loading: React.FC<ILoading> = ({ isLoading }) => {
   return (
     <div>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-loading">
+        <div className="absolute inset-0 flex items-center justify-center bg-loading z-[9999]">
           <span className="loader"></span>
         </div>
       )}

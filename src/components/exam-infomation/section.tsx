@@ -17,60 +17,50 @@ import useUserStore from "@/stores/userStore";
 import { CiTimer } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { IoBookOutline } from "react-icons/io5";
+import { formatSeconds } from "@/utils/format";
+import { Exam } from "@/types/ExamModel";
 
 interface ISection {
-  idExam: string;
+  content: Exam;
 }
 
-const Section: React.FC<ISection> = ({ idExam }) => {
-  const user = useUserStore((state) => state.user);
+const Section: React.FC<ISection> = ({ content }) => {
   const router = useRouter();
   const handleClick = (url: string) => {
     router.push(url);
   };
   return (
-    <div>
-      <p className="text-lg text-primary">
-        Bài kiểm tra HK2 môn cslt năm 2023-2024
-      </p>
+    <div className=" flex flex-col flex-1 justify-center h-[calc(100vh-48px)]">
+      <p className="text-lg text-primary">{content.title}</p>
       <div className="text-sm mt-2">
-        <p>Bài kiểm tra này không được sử dụng tài liệu</p>
-        <p>Bài kiểm tra này không được sử dụng tài liệu</p>
-        <p>Bài kiểm tra này không được sử dụng tài liệu</p>
+        <p>{content.description}</p>
       </div>
       <div className="flex flex-wrap text-sm text-slate-500 mt-2">
         <div className="flex items-center justify-center mr-4 mb-2">
           <CiTimer />
-          <p className="ml-2">60p</p>
+          <p className="ml-2">{formatSeconds(content.duration)}</p>
         </div>
         <div className="flex items-center justify-center mr-4 mb-2">
           <IoBookOutline />
-          <p className="ml-2">Cơ sở lập trình</p>
+          <p className="ml-2">{content.group.course.name}</p>
         </div>
         <div className="flex items-center justify-center mr-4 mb-2">
           <SiGoogleclassroom />
-          <p className="ml-2">Nhóm 20</p>
+          <p className="ml-2">{content.group.name}</p>
         </div>
         <div className="flex items-center justify-center mr-4 mb-2">
           <CiUser />
-          <p className="ml-2">Phan Tấn Quốc</p>
+          <p className="ml-2">{content.group.teacher.name}</p>
         </div>
       </div>
 
       <div className="flex justify-between items-center mt-2">
-        <Button
-          variant="secondary"
-          onClick={() =>
-            handleClick(`/exam-infomation/${decodeURIComponent(idExam)}`)
-          }
-        >
+        <Button variant="secondary" onClick={() => handleClick(`/test-exam`)}>
           Quay lại
         </Button>
         <Button
           variant="default"
-          onClick={() =>
-            handleClick(`/take-exam/${decodeURIComponent(idExam)}`)
-          }
+          onClick={() => handleClick(`/take-exam/${content.id}`)}
         >
           Bắt đầu làm bài
         </Button>

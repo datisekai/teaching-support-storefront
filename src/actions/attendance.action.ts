@@ -1,5 +1,3 @@
-"use server";
-import { Attendance } from "@/types/AttendanceModel";
 import { myFetch } from "@/utils/myFetch";
 
 export async function getAttendanceHistory(date: string) {

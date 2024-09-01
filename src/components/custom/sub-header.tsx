@@ -4,7 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 
 interface SubHeaderProps {
-  content: any;
+  content: { title: string };
   iconRight: React.ReactElement;
 }
 

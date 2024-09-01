@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Attendance } from "@/types/AttendanceModel";
 import ItemSection from "./item-section";
 import { useAttendance } from "@/hooks/useAttendance";
@@ -11,23 +11,13 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Input } from "../ui/input";
-import { getAttendanceHistory } from "@/actions/attendance.action";
+import { ExamResult } from "@/types/ExamResultModel";
 
-const Section = () => {
+interface ISection {
+  contents: ExamResult[];
+}
+const Section: React.FC<ISection> = ({ contents }) => {
   const [date, setDate] = useState<Date>(new Date());
-  const [contents, setContents] = useState<Attendance[]>([]);
-
-  useEffect(() => {
-    const fetchAttendance = async () => {
-      const formattedDate = format(date, "yyyy-MM-dd", { locale: vi });
-      const data = await getAttendanceHistory(formattedDate);
-      setContents(data);
-      console.log("checked");
-    };
-    console.log(date);
-
-    fetchAttendance();
-  }, [date]);
 
   return (
     <div>
@@ -60,7 +50,7 @@ const Section = () => {
       </div>
       <div className="mb-20">
         {contents.length > 0 ? (
-          contents.map((item: Attendance, index: number) => (
+          contents.map((item: ExamResult, index: number) => (
             <ItemSection content={item} key={index} />
           ))
         ) : (

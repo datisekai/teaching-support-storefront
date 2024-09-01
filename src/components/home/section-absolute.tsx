@@ -1,9 +1,9 @@
 import { getAttendanceHistory } from "@/actions/attendance.action";
 import { Attendance } from "@/types/AttendanceModel";
-import { formattedDate } from "@/utils";
 import React from "react";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
+import { formattedDate } from "@/utils/format";
 
 const SectionAbsolute = async () => {
   const contents = (await getAttendanceHistory("")) as Attendance[];

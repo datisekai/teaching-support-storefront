@@ -2,11 +2,11 @@ import React from "react";
 import { Card, CardContent } from "../ui/card";
 import { Heart } from "lucide-react";
 
-interface IITEMSECTION {
+interface IItemSection {
   content: any;
 }
 
-const ItemSection: React.FC<IITEMSECTION> = ({ content }) => {
+const ItemSection: React.FC<IItemSection> = ({ content }) => {
   return (
     <Card className="text-start rounded-xl">
       <CardContent className="px-2 pt-2">
