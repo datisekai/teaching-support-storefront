@@ -25,9 +25,13 @@ const TakeExam: React.FC<Props> = async ({ params }) => {
         <SubHeader
           content={content}
           iconRight={
-            <p className="font-bold">
-              {/* Thời gian: <CountdownCustom date={Date.now() + 3600 * 1000} /> */}
-            </p>
+            <div className="font-bold flex justify-center items-center">
+              <p>Thời gian: </p>
+              <CountdownCustom
+                date={Date.now() + +data.duration * 1000}
+                id={data.id}
+              />
+            </div>
           }
         />
       </CardHeader>

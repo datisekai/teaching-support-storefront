@@ -20,7 +20,7 @@ const ExamInfomation: React.FC<Props> = async ({ params }) => {
   return (
     <div>
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
-        <SubHeader content={content} iconRight={<></>} />
+        <SubHeader isBack={false} content={content} iconRight={<></>} />
       </CardHeader>
       <CardContent>
         <Section idExam={idExam} contents={contents} />

@@ -4,12 +4,12 @@ export function formatTime(milliseconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
-  return `${minutes}:${seconds}`;
+  return `${minutes} phút ${seconds} giây`;
 }
 export function formattedDate(dateString: string) {
   return moment.utc(dateString).local().format("DD/MM/YYYY HH:mm:ss");
 }
 export function formatSeconds(seconds: number) {
   const minutes = Math.floor(seconds / 60);
-  return `${minutes}p`;
+  return `${minutes} phút`;
 }
