@@ -15,13 +15,19 @@ interface ICountdownCustom {
 
 const CountdownCustom: React.FC<ICountdownCustom> = ({ date, id }) => {
   const { toast } = useToast();
-  const user = useUserStore((state) => state.user);
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [clientDate, setClientDate] = useState<number | null>(null);
 
   useEffect(() => {
-    const savedTime = localStorage.getItem(`countdown-${id}-${user.code}`);
+    let startTime = localStorage.getItem(`startTime-${id}`);
+
+    if (!startTime) {
+      startTime = Date.now().toString();
+      localStorage.setItem(`startTime-${id}`, startTime);
+    }
+
+    const savedTime = localStorage.getItem(`countdown-${id}`);
     const currentTime = Date.now();
 
     if (savedTime) {
@@ -30,11 +36,12 @@ const CountdownCustom: React.FC<ICountdownCustom> = ({ date, id }) => {
       if (savedTotal > currentTime) {
         setClientDate(savedTotal);
       } else {
-        setClientDate(date);
-        localStorage.removeItem(`countdown-${id}-${user.code}`);
+        setClientDate(+startTime + date);
+        localStorage.removeItem(`countdown-${id}`);
+        localStorage.removeItem(`startTime-${id}`);
       }
     } else {
-      setClientDate(date);
+      setClientDate(+startTime + date);
     }
   }, [date, id]);
 
@@ -56,7 +63,7 @@ const CountdownCustom: React.FC<ICountdownCustom> = ({ date, id }) => {
         }
 
         localStorage.removeItem("examAnswers");
-        localStorage.removeItem(`countdown-${id}-${user.code}`);
+        localStorage.removeItem(`countdown-${id}`);
         toast({
           variant: "default",
           className: "bg-success text-white",
@@ -76,10 +83,7 @@ const CountdownCustom: React.FC<ICountdownCustom> = ({ date, id }) => {
 
   const renderer: CountdownRendererFn = ({ total }) => {
     if (total > 0) {
-      localStorage.setItem(
-        `countdown-${id}-${user.code}`,
-        (Date.now() + total).toString()
-      );
+      localStorage.setItem(`countdown-${id}`, (Date.now() + total).toString());
     }
 
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);

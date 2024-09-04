@@ -14,7 +14,6 @@ interface Props {
 
 const TakeExam: React.FC<Props> = async ({ params }) => {
   const { idExam } = params;
-
   const data = await getExamById(idExam);
 
   const content = { id: 1, title: "Làm bài kiểm tra" };
@@ -27,15 +26,12 @@ const TakeExam: React.FC<Props> = async ({ params }) => {
           iconRight={
             <div className="font-bold flex justify-center items-center">
               <p>Thời gian: </p>
-              <CountdownCustom
-                date={Date.now() + +data.duration * 1000}
-                id={data.id}
-              />
+              <CountdownCustom date={+data.duration * 1000} id={data.id} />
             </div>
           }
         />
       </CardHeader>
-      <ScrollArea className="h-[calc(100vh-48px)] ">
+      <ScrollArea className="h-[calc(100vh-48px)]">
         <CardContent className="mt-8 pb-20">
           <Section content={data} />
         </CardContent>
