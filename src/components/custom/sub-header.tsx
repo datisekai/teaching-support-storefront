@@ -7,12 +7,14 @@ interface SubHeaderProps {
   isBack?: boolean;
   content: { id: number; title: string };
   iconRight: React.ReactElement;
+  onlickRight?: boolean;
 }
 
 const SubHeader: React.FC<SubHeaderProps> = ({
   isBack = true,
   content,
   iconRight,
+  onlickRight = false,
 }) => {
   const router = useRouter();
 
@@ -35,7 +37,11 @@ const SubHeader: React.FC<SubHeaderProps> = ({
 
         <div className="text-sm font-bold">{content.title}</div>
       </div>
-      <div onClick={() => handleRouter("/account-setting")}>{iconRight}</div>
+      {onlickRight ? (
+        <div onClick={() => handleRouter("/account-setting")}>{iconRight}</div>
+      ) : (
+        <div>{iconRight}</div>
+      )}
     </div>
   );
 };

@@ -27,6 +27,12 @@ const Section: React.FC<ISection> = ({ content }) => {
     [key: number]: string;
   }>({});
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
@@ -106,9 +112,14 @@ const Section: React.FC<ISection> = ({ content }) => {
       {currentItem && (
         <div>
           <div>
-            <p className="text-base font-bold text-primary">
-              {currentItem.content}
-            </p>
+            {isMounted && currentItem?.content ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: currentItem.content }}
+                className="text-base font-bold text-primary"
+              ></div>
+            ) : (
+              <p>Loading content...</p>
+            )}
             <div className="text-sm mt-2">
               <RadioGroup
                 value={selectedAnswers[page] || ""}

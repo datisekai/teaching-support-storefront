@@ -39,7 +39,11 @@ const Account = () => {
   return (
     <div>
       <CardHeader className="px-4 bg-[url('/images/background-header.png')] h-[40px] flex justify-center">
-        <SubHeader content={content} iconRight={<Settings />} />
+        <SubHeader
+          content={content}
+          iconRight={<Settings />}
+          onlickRight={true}
+        />
       </CardHeader>
       <CardContent className="px-0 pb-20">
         <ScrollArea className="h-[calc(100vh-112px)] ">
