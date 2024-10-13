@@ -5,10 +5,10 @@ import DropdownMenuCustom from "../custom/dropdown-menu-custom";
 import { Dot } from "lucide-react";
 import { getAttendanceHistory } from "@/actions/attendance.action";
 
-import { Attendance } from "@/types/AttendanceModel";
+import { Attendance, IAttendance } from "@/types/AttendanceModel";
 import { formattedDate } from "@/utils/format";
 interface IITEMSection {
-  content: Attendance;
+  content: IAttendance;
 }
 
 const ItemSection: FC<IITEMSection> = ({ content }) => {
@@ -17,14 +17,14 @@ const ItemSection: FC<IITEMSection> = ({ content }) => {
       <div className="flex justify-between items-center py-2 px-4">
         <div className="flex items-center">
           <div className="text-sm font-bold">
-            Mã môn: {content.room.group.course.id}
+            Mã môn: {content.attendance.class.major.code}
           </div>
           <Dot className="text-slate-400 w-4" />
           <Badge
             variant={"outline"}
             className="bg-success text-white font-bold text-[13px]"
           >
-            {content.success ? "Thành công" : "Thất bại"}
+            Thành công
           </Badge>
         </div>
         <DropdownMenuCustom />
@@ -34,26 +34,19 @@ const ItemSection: FC<IITEMSection> = ({ content }) => {
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-sm text-slate-400">Môn:</div>
           <div className="col-span-4 text-sm font-medium text-primary">
-            {content.room.group.course.name}
+            {content.attendance.class.major.name}
           </div>
         </div>
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-sm text-slate-400">Giảng viên:</div>
           <div className="col-span-4 text-sm flex items-center">
-            <p>{content.room.group.teacher.name}</p>
+            <p>{content.attendance.class.teachers[0].name}</p>
           </div>
         </div>
-        <div className="grid grid-cols-6">
-          <div className="col-span-2 text-sm text-slate-400">Năm học:</div>
-          <div className="col-span-4 text-sm">
-            {content.room.group.due_date}
-          </div>
-        </div>
-
         <div className="grid grid-cols-6">
           <div className="col-span-2 text-sm text-slate-400">Thời gian:</div>
           <div className="col-span-4 text-sm">
-            {formattedDate(content.updated_at)}
+            {formattedDate(content.createdAt)}
           </div>
         </div>
       </div>

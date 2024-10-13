@@ -10,7 +10,7 @@ interface ILogin {
   password: string;
 }
 export async function login(payload: ILogin) {
-  const response = await fetch(`${SERVER_URL}/api.auth/login`, {
+  const response = await fetch(`${SERVER_URL}/api.auth/login-student`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,17 +19,19 @@ export async function login(payload: ILogin) {
   });
 
   const body = await response.json();
+  console.log("body", body);
   const data = body.data;
-  const token = data?.token;
+  const token = data?.accessToken;
   setCookieServer(COOKIE_TOKEN, token);
 
   return data;
 }
 
 export async function getMyInfo() {
-  const response = await myFetch("/api.user/me");
+  const response = await myFetch("/api.auth/profile");
   const data = await response.json();
   // cookies().set(COOKIE_USER, JSON.stringify(data.data.user));
 
-  return data.data.user;
+  console.log("data", data);
+  return data.user;
 }

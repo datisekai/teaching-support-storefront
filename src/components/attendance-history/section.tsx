@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Attendance } from "@/types/AttendanceModel";
+import { Attendance, IAttendance } from "@/types/AttendanceModel";
 import ItemSection from "./item-section";
 
 interface ISection {
-  contents: Attendance[];
+  contents: IAttendance[]
 }
 
 const Section: React.FC<ISection> = ({ contents }) => {
@@ -12,7 +12,7 @@ const Section: React.FC<ISection> = ({ contents }) => {
     <div>
       <div className="mb-20">
         {contents.length > 0 ? (
-          contents.map((item: Attendance, index: number) => (
+          contents.map((item, index: number) => (
             <ItemSection content={item} key={index} />
           ))
         ) : (

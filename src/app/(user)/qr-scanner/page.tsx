@@ -1,30 +1,22 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
+import React from "react";
 
+import Footer from "@/components/custom/footer";
+import SubHeader from "@/components/custom/sub-header";
 import {
-  Card,
   CardContent,
   CardFooter,
-  CardHeader,
+  CardHeader
 } from "@/components/ui/card";
-import SubHeader from "@/components/custom/sub-header";
-import Footer from "@/components/custom/footer";
-import useUserStore from "@/stores/userStore";
-import * as Colyseus from "colyseus.js";
-import { jwtDecode } from "jwt-decode";
-import { SERVER_REALTIME_URL } from "@/constants";
 import { useToast } from "@/components/ui/use-toast";
+import { SERVER_REALTIME_URL } from "@/constants";
+import { socket } from "@/lib/socket";
+import useUserStore from "@/stores/userStore";
+import { ISocketResponse } from "@/types/SocketModel";
+import * as Colyseus from "colyseus.js";
 import { useRouter } from "next/navigation";
 
-interface DecodedToken {
-  roomId: number;
-  time: number;
-  room_socket_id: string;
-  room_socket_name: string;
-  iat: number;
-  exp: number;
-}
 
 const QRScanner = () => {
   const content = { id: 1, title: "Quét QR" };
@@ -32,68 +24,32 @@ const QRScanner = () => {
 
   const [isSuccess, setIsSuccess] = React.useState(false);
 
-  let client = new Colyseus.Client(SERVER_REALTIME_URL);
   const router = useRouter();
 
-  // const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
-  // const [device, setDevice] = useState("-1");
-
-  // const [toastDevice, setToastDevice] = useState("");
-
-  // useEffect(() => {
-  //   const checkCameraAvailability = async () => {
-  //     try {
-  //       const devices = await navigator.mediaDevices.enumerateDevices();
-  //       const cameras = devices.filter(
-  //         (device) => device.kind === "videoinput" && device.deviceId
-  //       );
-  //       if (cameras.length === 0) {
-  //         console.error("No cameras found.");
-  //         setToastDevice("Cấp quyền truy cập camera và tải lại trang!");
-  //         return;
-  //       }
-  //       setCameras(cameras);
-  //     } catch (error) {
-  //       setToastDevice("Kiểm tra lại camera và tải lại trang!");
-  //       console.error("Error checking camera availability:", error);
-  //     }
-  //   };
-
-  //   checkCameraAvailability();
-  // }, []);
   const { toast } = useToast();
 
-  console.log("test deploy");
-
   const handleClick = async (result: IDetectedBarcode[]) => {
-    try {
-      const decoded = jwtDecode(result[0].rawValue) as DecodedToken;
-      const room = await client.joinById(decoded.room_socket_id, {
-        qr_key: result[0].rawValue,
-        code: user.code,
-        name: user.name,
-        user_id: user.id,
-      });
-      toast({
-        variant: "default",
-        className: "bg-success text-white",
-        title: "Điểm danh thành công.",
-      });
-      setIsSuccess(true);
-      setTimeout(() => {
-        router.push("/attendance-history");
-      }, 2000);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        className: "text-white",
-        title: "Điểm danh thất bại." + error,
-      });
+
+    const qrCode = result[0].rawValue;
+    if (qrCode) {
+      socket.emit('checkQRCode', { code: user.code, qrCode }, (response: ISocketResponse) => {
+        const { message, success } = response;
+        toast({
+          variant: success ? "default" : "destructive",
+          className: "bg-success text-white",
+          title: message,
+        });
+
+        if (success) {
+          setIsSuccess(success);
+          setTimeout(() => {
+            router.push("/attendance-history");
+          }, 2000);
+        }
+      })
     }
   };
-  // const handleChange = (value: string) => {
-  //   setDevice(value);
-  // };
+
 
   return (
     <div>
@@ -101,30 +57,7 @@ const QRScanner = () => {
         <SubHeader content={content} iconRight={<></>} />
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-between mt-20 ">
-        {/* <div className="flex flex-col justify-center items-center mb-4">
-          <Select value={device} onValueChange={(value) => handleChange(value)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Chọn camera..." defaultValue={"-1"} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="-1">Chọn camera</SelectItem>
-                {cameras.map((item, index) => {
-                  return (
-                    <SelectItem value={item.deviceId} key={index}>
-                      {item.label}
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div> */}
-        {/* {cameras.length === 0 && (
-          <div className="items-center text-destructive text-center">
-            {toastDevice}
-          </div>
-        )} */}
+
         <div className="items-center">Hướng camera về phía mã QR</div>
         <Scanner
           components={{

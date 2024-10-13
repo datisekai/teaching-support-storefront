@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 interface SubHeaderProps {
   isBack?: boolean;
-  content: { id: number; title: string };
+  content: { title: string };
   iconRight: React.ReactElement;
   onlickRight?: boolean;
 }
